@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from main.models.candidates import Candidate
+from main.models.candidates import Candidate,Foydalanuvchi
 from datetime import date
 class CandidateSerializer(serializers.ModelSerializer):
     # SerializerMethodField bilan status_choices metodini aniqlash
@@ -43,4 +43,8 @@ class CandidateSerializer(serializers.ModelSerializer):
         
         return age
 
-        
+
+class FoydalanuvchiSR(serializers.Serializer):
+    class Meta:
+        model = Foydalanuvchi
+        fiels = ['id','name','']
