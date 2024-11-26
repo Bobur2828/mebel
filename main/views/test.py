@@ -15,7 +15,7 @@ def generate_random_candidate():
         "experience_name": random.choice(["Dasturlash", "Tahlil", "Dizayn", "Marketing"]),
         "skill": random.choice(["Python", "JavaScript", "Django", "React", "SQL", "PHP"]),
         "expected_salary": f"{random.randint(4, 15)} million",  # 4-15 million
-        "phone_number": fake.phone_number(),
+        "phone_number": f"+9989{random.randint(1000000, 9999999)}",  # Uzbekiston telefon raqami formati
         "tg_username": f"@{fake.user_name()}",
         "description": fake.text(),
         "status": random.choice([
@@ -23,7 +23,6 @@ def generate_random_candidate():
             "taklif_berilgan", "qabul_qilingan", "rad_etilgan", "kutish"
         ]),
     }
-
 
 # POST so'rovini yuborish funksiyasi
 def post_random_candidate():
@@ -42,5 +41,6 @@ def post_random_candidate():
     else:
         print(f"Failed to create candidate: {response.status_code}, {response.text}")
 
-for i in range(3):
+# 3 ta tasodifiy nomzod ma'lumotlarini yuborish
+for i in range(50):
     post_random_candidate()

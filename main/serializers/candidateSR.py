@@ -1,16 +1,18 @@
 from rest_framework import serializers
 from main.models.candidates import Candidate
-
+from datetime import date
 class CandidateSerializer(serializers.ModelSerializer):
     # SerializerMethodField bilan status_choices metodini aniqlash
     status_choices = serializers.SerializerMethodField()
     date_of_birth = serializers.DateField(format='%d.%m.%Y')
+    age = serializers.SerializerMethodField()
     class Meta:
         model = Candidate
         fields = [
             'id',
             'name',  # Nomzod ismi
             'date_of_birth',  # Tug'ilgan sanasi
+            'age',
             'address',  # Nomzod Manzili
             'experience',  # Tajriba yili
             'experience_name',  # Qaysi sohalarda ishlagani
@@ -30,7 +32,15 @@ class CandidateSerializer(serializers.ModelSerializer):
         all_choices.pop(obj.status, None)
         return all_choices
     
-    # def get_date_of_birth(self, obj):
-    #     if obj.date_of_birth:
-    #         return obj.date_of_birth.strftime('%d.%m.%Y')
+    def get_age(self, obj):
+        # Calculate the age by subtracting the birth year from the current year
+        today = date.today()
+        age = today.year - obj.date_of_birth.year
+        
+        # Check if the birthday has occurred this year, if not subtract 1 from the age
+        if today.month < obj.date_of_birth.month or (today.month == obj.date_of_birth.month and today.day < obj.date_of_birth.day):
+            age -= 1
+        
+        return age
+
         
