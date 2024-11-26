@@ -27,10 +27,10 @@ class CandidateSerializer(serializers.ModelSerializer):
         ]
 
     def get_status_choices(self, obj):
-        # Barcha statuslar, ammo hozirgi statusni chiqarib tashlash
+    # Barcha statuslar, ammo hozirgi statusni chiqarib tashlash
         all_choices = dict(Candidate.STATUS_CHOICES)
         all_choices.pop(obj.status, None)
-        return all_choices
+        return list(all_choices.keys())
     
     def get_age(self, obj):
         # Calculate the age by subtracting the birth year from the current year

@@ -252,7 +252,17 @@ class SearchView(APIView):
         # Natijani serializatsiya qilish
         serializer = CandidateSerializer(candidates, many=True)
 
-        # Javobni yuborish
-        return FunctionalView.send_response(
-            serializer.data, status='true', message="Successfully", count=candidates.count()
-        )
+        data={
+            "candidates":serializer.data
+        }# Javobni yuborish
+        response_date = {
+            "message":"Successfully",
+            "status":"True",
+            "data":data
+            
+        }
+
+        return Response (response_date)
+        # return FunctionalView.send_response(
+        #     serializer.data, status='true', message="Successfully", count=candidates.count()
+        # )
