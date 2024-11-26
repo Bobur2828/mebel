@@ -49,7 +49,7 @@ class CandidateView(APIView):
         return Response(response_data, status=status.HTTP_200_OK)
 
     def get_filtered_candidates(self, ordering=None, status_filter=None):
-        candidates = Candidate.objects.all().order_by('-date')
+        candidates = Candidate.objects.all().order_by('-created_on')
 
         if status_filter:
             candidates = candidates.filter(status=status_filter)
